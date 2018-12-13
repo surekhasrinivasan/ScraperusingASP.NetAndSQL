@@ -54,9 +54,16 @@ namespace WebScraperwithASP_NET.Controllers
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                 conn.Open();
-                     
+
+               
                 // Scraper run and save data to stockItems
                 List<Stock> stockItems = newScraper.Scrape();
+
+                // Delete existing stock data and output new scraped data
+                SqlCommand deleteAll = new SqlCommand("DELETE FROM Stock", conn);
+                deleteAll.ExecuteNonQuery();
+                db.SaveChanges();
+
                 foreach (var stockItem in stockItems)
                 {
                     stockItem.MarketTime = DateTime.Now;
