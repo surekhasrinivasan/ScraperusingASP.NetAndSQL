@@ -49,15 +49,22 @@ namespace WebScraperwithASP_NET.Controllers
         public ActionResult Scrape()
         {
             Scraper newScraper = new Scraper();
+
+            // Scraper run and save data to stockItems
+            List<Stock> stockItems = newScraper.Scrape();
+
             var connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=StockDatabase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-                using (SqlConnection conn = new SqlConnection(connString))
+            // Open SQL Connection
+            using (SqlConnection conn = new SqlConnection(connString))
                 {
-                conn.Open();
+                conn.Open();               
+                
 
-               
-                // Scraper run and save data to stockItems
-                List<Stock> stockItems = newScraper.Scrape();
+                // Move existing stock data to History table 
+                SqlCommand moveData = new SqlCommand("INSERT INTO History SELECT * FROM Stock", conn);
+                moveData.ExecuteNonQuery();
+                db.SaveChanges();
 
                 // Delete existing stock data and output new scraped data
                 SqlCommand deleteAll = new SqlCommand("DELETE FROM Stock", conn);
@@ -84,6 +91,12 @@ namespace WebScraperwithASP_NET.Controllers
                 
                 db.SaveChanges();
                 return RedirectToAction("Index");
+        }
+
+        // GET: Stocks/History
+        public ActionResult History()
+        {
+            return View(db.Histories.ToList());
         }
 
         // GET: Stocks/Edit/5
