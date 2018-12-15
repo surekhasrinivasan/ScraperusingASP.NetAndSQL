@@ -4,7 +4,27 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StockDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StockDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'StockDatabase.dbo.History' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="Symbol" />
+            
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="Symbol" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastPrice" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Change" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PercentChange" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Currency" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MarketTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="MarketCap" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="Stock">
           <Key>
             <PropertyRef Name="Symbol" />
@@ -19,9 +39,19 @@
         </EntityType>
         <EntityContainer Name="StockDatabaseModelStoreContainer">
           <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History" EntityType="Self.History" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [History].[Symbol] AS [Symbol], 
+    [History].[LastPrice] AS [LastPrice], 
+    [History].[Change] AS [Change], 
+    [History].[PercentChange] AS [PercentChange], 
+    [History].[Currency] AS [Currency], 
+    [History].[MarketTime] AS [MarketTime], 
+    [History].[MarketCap] AS [MarketCap]
+    FROM [dbo].[History] AS [History]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StockDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -39,7 +69,20 @@
         </EntityType>
         <EntityContainer Name="StockDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Stocks" EntityType="Self.Stock" />
+          <EntitySet Name="Histories" EntityType="StockDatabaseModel.History" />
         </EntityContainer>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="Symbol" />
+          </Key>
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LastPrice" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Change" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PercentChange" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Currency" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MarketTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="MarketCap" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -56,6 +99,19 @@
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="MarketTime" ColumnName="MarketTime" />
                 <ScalarProperty Name="MarketCap" ColumnName="MarketCap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Histories">
+            <EntityTypeMapping TypeName="StockDatabaseModel.History">
+              <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="MarketCap" ColumnName="MarketCap" />
+                <ScalarProperty Name="MarketTime" ColumnName="MarketTime" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="PercentChange" ColumnName="PercentChange" />
+                <ScalarProperty Name="Change" ColumnName="Change" />
+                <ScalarProperty Name="LastPrice" ColumnName="LastPrice" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

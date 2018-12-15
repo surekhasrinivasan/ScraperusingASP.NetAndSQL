@@ -26,5 +26,6 @@ namespace WebScraperwithASP_NET.Models
         }
     
         public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<History> Histories { get; set; }
     }
 }

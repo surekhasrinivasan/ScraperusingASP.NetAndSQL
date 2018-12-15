@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="bec4e3d03a474fcab0c273c5fb8f86f2" Name="Diagram1">
         <EntityTypeShape EntityType="StockDatabaseModel.Stock" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockDatabaseModel.History" Width="1.5" PointX="3.375" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
