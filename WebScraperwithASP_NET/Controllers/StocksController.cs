@@ -13,7 +13,7 @@ namespace WebScraperwithASP_NET.Controllers
 {
     public class StocksController : Controller
     {
-        private StockDatabaseEntities db = new StockDatabaseEntities();
+        private StockDatabaseEntities1 db = new StockDatabaseEntities1();
 
         // GET: Stocks
         public ActionResult Index()
@@ -22,7 +22,7 @@ namespace WebScraperwithASP_NET.Controllers
         }
 
         // GET: Stocks/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -45,7 +45,21 @@ namespace WebScraperwithASP_NET.Controllers
         // POST: Stocks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,Symbol,LastPrice,Change,PercentChange,Currency,MarketTime,MarketCap")] Stock stock)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Stocks.Add(stock);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View(stock);
+        //}
+
+        // GET: Stocks/Scrape
         public ActionResult Scrape()
         {
             Scraper newScraper = new Scraper();
@@ -57,9 +71,8 @@ namespace WebScraperwithASP_NET.Controllers
 
             // Open SQL Connection
             using (SqlConnection conn = new SqlConnection(connString))
-                {
-                conn.Open();               
-                
+            {
+                conn.Open();
 
                 // Move existing stock data to History table 
                 SqlCommand moveData = new SqlCommand("INSERT INTO History SELECT * FROM Stock", conn);
@@ -85,22 +98,16 @@ namespace WebScraperwithASP_NET.Controllers
                     insertCommand.Parameters.AddWithValue("@MarketCap", stockItem.MarketCap.ToString());
                     insertCommand.ExecuteNonQuery();
                 }
-                    Console.WriteLine("Database Updated");
-                    conn.Close();
-                }
-                
-                db.SaveChanges();
-                return RedirectToAction("Index");
-        }
+                Console.WriteLine("Database Updated");
+                conn.Close();
+            }
 
-        // GET: Stocks/History
-        public ActionResult History()
-        {
-            return View(db.Histories.ToList());
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Stocks/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -119,7 +126,7 @@ namespace WebScraperwithASP_NET.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Symbol,LastPrice,Change,PercentChange,Currency,MarketTime,MarketCap")] Stock stock)
+        public ActionResult Edit([Bind(Include = "Id,Symbol,LastPrice,Change,PercentChange,Currency,MarketTime,MarketCap")] Stock stock)
         {
             if (ModelState.IsValid)
             {
@@ -131,7 +138,7 @@ namespace WebScraperwithASP_NET.Controllers
         }
 
         // GET: Stocks/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -148,7 +155,7 @@ namespace WebScraperwithASP_NET.Controllers
         // POST: Stocks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Stock stock = db.Stocks.Find(id);
             db.Stocks.Remove(stock);
