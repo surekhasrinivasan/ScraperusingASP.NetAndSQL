@@ -14,6 +14,7 @@ namespace WebScraperwithASP_NET.Models
     
     public partial class Stock
     {
+        public int Id { get; set; }
         public string Symbol { get; set; }
         public string LastPrice { get; set; }
         public string Change { get; set; }

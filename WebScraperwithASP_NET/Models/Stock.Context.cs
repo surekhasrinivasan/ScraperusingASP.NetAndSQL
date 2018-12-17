@@ -13,10 +13,10 @@ namespace WebScraperwithASP_NET.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class StockDatabaseEntities : DbContext
+    public partial class StockDatabaseEntities1 : DbContext
     {
-        public StockDatabaseEntities()
-            : base("name=StockDatabaseEntities")
+        public StockDatabaseEntities1()
+            : base("name=StockDatabaseEntities1")
         {
         }
     
