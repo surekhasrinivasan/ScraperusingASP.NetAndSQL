@@ -12,7 +12,7 @@
 
     @*<br />
 
-    @Html.ActionLink("Show past scrapes", "History", "Stocks")*@
+        @Html.ActionLink("Show past scrapes", "History", "Stocks")*@
 </p>
 
 <table class="table">
@@ -41,35 +41,109 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Symbol)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Change)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PercentChange)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Currency)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MarketTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MarketCap)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Symbol }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Symbol }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Symbol })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Symbol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Change)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PercentChange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketCap)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Symbol }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Symbol }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Symbol })
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+
+
+@*@model IEnumerable<WebScraperwithASP_NET.Models.Stock>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Symbol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Change)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PercentChange)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MarketTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MarketCap)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Symbol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Change)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PercentChange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketCap)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>*@
