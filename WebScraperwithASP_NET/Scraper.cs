@@ -40,8 +40,8 @@ namespace WebScraperwithASP_NET
             //chromeDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             chromeDriver.Url = "https://finance.yahoo.com/portfolio/p_0/view/v1";
 
-            var closePopup = chromeDriver.FindElementByXPath("//dialog[@id = '__dialog']/section/button");
-            closePopup.Click();
+            //var closePopup = chromeDriver.FindElementByXPath("//dialog[@id = '__dialog']/section/button");
+            //closePopup.Click();
 
             //var stocks = chromeDriver.FindElements(By.XPath("//*[@id=\"main\"]/section/section[2]/div[2]/table/tbody/tr[*]/td[*]"));
             //foreach (var stock in stocks)
