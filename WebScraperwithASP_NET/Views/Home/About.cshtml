@@ -5,6 +5,35 @@
 <h3>@ViewBag.Message</h3>
 
 <p>
-    Basic Web Scraper Project built in Visual Studio using Asp.Net Web Application.<br />
-    Using Selenium and ChromeDriver, the data is scraped from Yahoo Finance Website.
-</p>
+        <b>Yahoo Finance Web Scraper project was built in Microsoft Visual Studio using Asp.Net Core Web Application by Surekha Srinivasan.</b>
+    </p>
+    <p>
+        Using Selenium and ChromDriver, I was able to navigate to Yahoo webpage, log in with username and password, after password 
+        verification it takes me to my Yahoo Finance Stocks Portfolio page, pulls all my favorite stocks data and prints it on Console, or the data is 
+        sent to a table in a database.
+    </p>
+    <p>
+        Using ASP.Net Web Application (.Net framework) MVC project is created, Visual Studio launches the browser page and opens the application's 
+        home page on a localhost:port#. Then we see a template with Home, Contact and About pages. The application also provides support to register a user and log in. 
+        The MVC pattern let me create StockController class which handles all the browser requests, it retrieves Stock model data and call view templates which display 
+        information.  
+    </p>
+    <p>
+        Using Stock Model Class (which defines the properties of the data that are stored in database) along with Entity Framework Core (which is a object-relational 
+        mapping framework) let me work with the database. That is Scaffolding the Stock.cs creates the database context and CRUD action methods. Then EF Migrations 
+        creates database. 
+    </p>
+    <p>
+        Using Microsoft SQL Server Object Explorer, database was created and then a table called dbo.Stock table was created with all the columns providing the  
+        necessary data types. When Scrape method is called in StockController.cs, it scrapes the data, using SQL command the data is inserted into Stock table 
+        and also displayed in the View. History link displays the previously scraped data. 
+   </p>
+    <p>
+        Technologies used in this project are:
+        <ul>
+            <li>Selenium</li>
+            <li>Selenium ChromeDriver</li>
+            <li>ASP.Net Entity framework</li>
+            <li>Microsoft SQL Server</li>
+        </ul>
+    </p>
